@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "baseUrl": "/",
+        "moduleResolution": "node",
+        "module": "es2015",
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strict": true,
+        "target": "es2015",
+        "allowSyntheticDefaultImports": true,
+        "lib": [
+            "dom",
+            "es2015",
+            "es2016"
+        ]
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

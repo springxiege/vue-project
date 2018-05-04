@@ -22,7 +22,7 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/index.ts'
   },
   output: {
     path: config.build.assetsRoot,
@@ -32,25 +32,20 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js','.ts', '.vue', '.json', '.tsx'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'components': resolve('src/components'),
+      'views': resolve('src/views'),
+      'router': resolve('src/router'),
+      'store': resolve('src/store'),
+      'assets': resolve('src/assets')
     }
   },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
-      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -74,6 +69,30 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          ...vueLoaderConfig,
+          loaders: {
+            ts: "babel-loader!ts-loader"
+          }
+        }
+      },
+      {
+        test: /\.ts$/,
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
+        use: [
+          {loader: 'babel-loader'},
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/]
+            }
+          }
+        ]
+        
       }
     ]
   },
