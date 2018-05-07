@@ -1,9 +1,9 @@
 <template>
-    <div>Home</div>
+    <div>Footer</div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-    name: 'MPhome'
+    name: 'MPfooter'
 })
 </script>

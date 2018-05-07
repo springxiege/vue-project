@@ -1,9 +1,9 @@
 <template>
-    <div>Home</div>
+    <div>Hello world</div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-    name: 'MPhome'
+  name: 'MPhello'
 })
 </script>
